@@ -78,7 +78,7 @@ class IES2MaresJobs {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
+		$this->define_job_types();
 	}
 
 	/**
@@ -111,7 +111,13 @@ class IES2MaresJobs {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-IES2MaresJobs-i18n.php';
 
-		/**
+        /**
+         * The class responsible for defining new Job Type
+         * of the plugin.
+         */
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-IES2MaresJobs-job-type.php';
+
+        /**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-IES2MaresJobs-admin.php';
@@ -174,6 +180,17 @@ class IES2MaresJobs {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
+
+    /**
+     * Register Job Type.
+     *
+     * @since    1.0.0
+     * @access   private
+     */
+    private function define_job_types() {
+        // Register custom post types
+        $Job_Type = new IES2MaresJobs_job_type();
+    }
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
