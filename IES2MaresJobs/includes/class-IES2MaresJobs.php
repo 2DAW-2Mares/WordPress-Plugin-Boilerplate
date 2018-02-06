@@ -122,7 +122,13 @@ class IES2MaresJobs {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-IES2MaresJobs-admin.php';
 
-		/**
+        /**
+         * The class responsible for defining widget to suscribe.
+         */
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-IES2MaresJobsWidgetSuscribe.php';
+
+
+        /**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
@@ -130,7 +136,7 @@ class IES2MaresJobs {
 
 		$this->loader = new IES2MaresJobs_Loader();
 
-	}
+    }
 
 	/**
 	 * Define the locale for this plugin for internationalization.
