@@ -172,6 +172,8 @@ class IES2MaresJobs {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+        $this->loader->add_action( 'admin_post_nopriv_IES2MaresJob_suscribe', $plugin_admin, 'IES2MaresJob_suscribe' );
+        $this->loader->add_action( 'admin_post_IES2MaresJob_suscribe', $plugin_admin, 'IES2MaresJob_suscribe' );
 
 		$plugin_shortcode = new IES2MaresJobs_shortcode();
 
@@ -192,7 +194,6 @@ class IES2MaresJobs {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
 	}
 
     /**

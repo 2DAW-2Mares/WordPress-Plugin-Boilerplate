@@ -100,4 +100,12 @@ class IES2MaresJobs_Admin {
 
 	}
 
+	public function IES2MaresJob_suscribe() {
+	    $suscriptores = get_option('IES2MaresJob_suscriptores');
+	    if(!in_array(htmlspecialchars($_POST["email"]), $suscriptores )) {
+            $suscriptores[] = htmlspecialchars($_POST["email"]);
+            update_option('IES2MaresJob_suscriptores', $suscriptores);
+        }
+	    wp_safe_redirect(site_url() );
+    }
 }
