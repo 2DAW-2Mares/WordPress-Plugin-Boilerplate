@@ -38,6 +38,7 @@ if(!class_exists('IES2MaresJobs_job_type'))
             // Initialize Post Type
             $this->create_post_type();
             add_action('save_post', array(&$this, 'save_post'));
+            add_action('publish_job', array(&$this, 'send_mail'));
         } // END public function init()
 
         /**
@@ -85,6 +86,32 @@ if(!class_exists('IES2MaresJobs_job_type'))
             {
                 return;
             } // if($_POST['post_type'] == self::POST_TYPE && current_user_can('edit_post', $post_id))
+        } // END public function save_post($post_id)
+
+        /**
+         * Send mail to subscribers
+         */
+        public function send_mail($post_id)
+        {
+            if($emails = get_option('IES2MaresJob_suscriptores')) {
+                $post = get_post($post_id);
+                $author = $post->post_author; /* Post author ID. */
+//                $name = get_the_author_meta( 'display_name', $author );
+                $email = get_the_author_meta( 'user_email', $author );
+                $title = $post->post_title;
+                $permalink = get_permalink( $post_id );
+                $edit = get_edit_post_link( $post_id, '' );
+                foreach ($emails as $email) {
+                    $to[] = $email;
+                }
+                $subject = sprintf( 'Published: %s', $title );
+                $message = sprintf ('Congratulations! Your article “%s” has been published.' . "\n\n", $title );
+                $message .= sprintf( 'View: %s', $permalink );
+                $headers[] = '';
+
+                wp_mail( $to, $subject, $message, $headers );
+
+            }
         } // END public function save_post($post_id)
 
         /**
