@@ -127,6 +127,10 @@ class IES2MaresJobs {
          */
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-IES2MaresJobsWidgetSuscribe.php';
 
+        /**
+         * The class responsible for defining shortcode.
+         */
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-IES2MaresJobs-shortcode.php';
 
         /**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -168,6 +172,10 @@ class IES2MaresJobs {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+		$plugin_shortcode = new IES2MaresJobs_shortcode();
+
+        $this->loader->add_action( 'init', $plugin_shortcode, 'IES2MaresJobs_shortcode_init' );
 
 	}
 
